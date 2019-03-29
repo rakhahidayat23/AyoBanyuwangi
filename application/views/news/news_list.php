@@ -75,7 +75,7 @@
                         {
                             "data": "id",
                             "orderable": false
-                        },{"data": "spot_id"},{"data": "tanggal"},{"data": "judul"},{"data": "keterangan"},
+                        },{"data": "id_spot"},{"data": "tanggal"},{"data": "judul"},{"data": "keterangan"},
                         {
                             "data" : "action",
                             "orderable": false,

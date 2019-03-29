@@ -41,7 +41,7 @@ class News extends CI_Controller
         if ($row) {
             $data = array(
 		'id' => $row->id,
-		'spot_id' => $row->spot_id,
+		'id_spot' => $row->id_spot,
 		'tanggal' => $row->tanggal,
 		'judul' => $row->judul,
         'keterangan' => $row->keterangan,

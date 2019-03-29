@@ -17,10 +17,10 @@ class News_model extends CI_Model
 
     // datatables
     function json() {
-        $this->datatables->select('news.id,spot.name as spot_id,news.tanggal,news.judul,news.keterangan');
+        $this->datatables->select('news.id,spot.name as id_spot,news.tanggal,news.judul,news.keterangan');
         $this->datatables->from('news');
         //add this line for join
-        $this->datatables->join('spot', 'news.spot_id = spot.id');
+        $this->datatables->join('spot', 'news.id_spot = spot.id');
         $this->datatables->add_column('action', anchor(site_url('news/read/$1'),'Read')." | ".anchor(site_url('news/update/$1'),'Update')." | ".anchor(site_url('news/delete/$1'),'Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'), 'id');
         return $this->datatables->generate();
     }
@@ -35,22 +35,22 @@ class News_model extends CI_Model
     // get data by id
     function get_by_id($id)
     {
-        $this->datatables->select('news.id,spot.name as spot_id,news.tanggal,news.judul,news.keterangan, spot_id');
+        $this->datatables->select('news.id,spot.name as id_spot,news.tanggal,news.judul,news.keterangan, id_spot');
         $this->db->where($this->id, $id);
-        $this->db->join('spot', 'news.spot_id = spot.id');
+        $this->db->join('spot', 'news.id_spot = spot.id');
         return $this->db->get($this->table)->row();
     }
 
     function get_by_spot($id)
     {   
-        $this->db->where('spot_id', $id);
+        $this->db->where('id_spot', $id);
         return $this->db->get($this->table)->result();
     }
     
     // get total rows
     function total_rows($q = NULL) {
         $this->db->like('id', $q);
-	$this->db->or_like('spot_id', $q);
+	$this->db->or_like('id_spot', $q);
 	$this->db->or_like('tanggal', $q);
 	$this->db->or_like('judul', $q);
 	$this->db->or_like('keterangan', $q);
@@ -62,7 +62,7 @@ class News_model extends CI_Model
     function get_limit_data($limit, $start = 0, $q = NULL) {
         $this->db->order_by($this->id, $this->order);
         $this->db->like('id', $q);
-	$this->db->or_like('spot_id', $q);
+	$this->db->or_like('id_spot', $q);
 	$this->db->or_like('tanggal', $q);
 	$this->db->or_like('judul', $q);
 	$this->db->or_like('keterangan', $q);
