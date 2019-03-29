@@ -48,7 +48,10 @@ class Spot extends CI_Controller
 		'longitude' => $row->longitude,
 		'date' => $row->date,
 		'type_spotName' => $row->type_spotName,
-		'userName' => $row->userName,
+        'userName' => $row->userName,
+        'start' => $row->start,
+        'end' => $row->end,
+        'status' => $row->status,
         );
         $this->render['content']= $this->load->view('spot/spot_read', $data, TRUE);
             $this->load->view('template', $this->render);
@@ -72,6 +75,10 @@ class Spot extends CI_Controller
 	    'date' => set_value('date'),
 	    'type_spot_id' => set_value('type_spot_id'),
         'user_id' => set_value('user_id'),
+        'start' => set_value('start'),
+        'end' => set_value('end'),
+        'status' => set_value('status'),
+        
         
 	);
     $this->render['content']= $this->load->view('spot/spot_form', $data, TRUE);
@@ -92,7 +99,9 @@ class Spot extends CI_Controller
 		'longitude' => $this->input->post('longitude',TRUE),
 		'date' => date("Y-m-d H:i:s"),
 		'type_spot_id' => $this->input->post('type_spot_id',TRUE),
-		'user_id' => $this->input->post('user_id',TRUE),
+        'user_id' => $this->input->post('user_id',TRUE),
+        'start' => $this->input->post('start',TRUE),
+		'end' => $this->input->post('end',TRUE),
 	    );
 
             $this->Spot_model->insert($data);
@@ -116,7 +125,10 @@ class Spot extends CI_Controller
 		'longitude' => set_value('longitude', $row->longitude),
 		'date' => set_value('date', $row->date),
 		'type_spot_id' => set_value('type_spot_id', $row->type_spot_id),
-		'user_id' => set_value('user_id', $row->user_id),
+        'user_id' => set_value('user_id', $row->user_id),
+        'start' => set_value('start', $row->start),
+        'end' => set_value('end', $row->end),
+        'status' => set_value('status', $row->status),
         );
             $this->render['content']= $this->load->view('spot/spot_form', $data, TRUE);
             $this->load->view('template', $this->render);
@@ -140,7 +152,10 @@ class Spot extends CI_Controller
 		'longitude' => $this->input->post('longitude',TRUE),
 		'date' => $this->input->post('date',TRUE),
 		'type_spot_id' => $this->input->post('type_spot_id',TRUE),
-		'user_id' => $this->input->post('user_id',TRUE),
+        'user_id' => $this->input->post('user_id',TRUE),
+        'start' => $this->input->post('start',TRUE),
+        'end' => $this->input->post('end',TRUE),
+        'status' => $this->input->post('status',TRUE),
 	    );
 
             $this->Spot_model->update($this->input->post('id', TRUE), $data);
@@ -171,7 +186,10 @@ class Spot extends CI_Controller
 	$this->form_validation->set_rules('longitude', 'longitude', 'trim|required');
 	$this->form_validation->set_rules('date', 'date', 'trim|required');
 	$this->form_validation->set_rules('type_spot_id', 'type spot id', 'trim|required');
-	$this->form_validation->set_rules('user_id', 'user id', 'trim|required');
+    $this->form_validation->set_rules('user_id', 'user id', 'trim|required');
+    $this->form_validation->set_rules('start', 'start', 'trim|required');
+    $this->form_validation->set_rules('end', 'end', 'trim|required');
+    $this->form_validation->set_rules('status', 'status', 'trim|required');
 
 	$this->form_validation->set_rules('id', 'id', 'trim');
 	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');

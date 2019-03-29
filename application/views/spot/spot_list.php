@@ -30,6 +30,9 @@
 		    <th>Date</th>
 		    <th>Type Spot Id</th>
 		    <th>User Id</th>
+            <th>Start</th>
+            <th>End</th>
+            <th>Status</th>
 		    <th width="200px">Action</th>
                 </tr>
             </thead>
@@ -79,7 +82,7 @@
                         {
                             "data": "id",
                             "orderable": false
-                        },{"data": "name"},{"data": "description"},{"data": "latitude"},{"data": "longitude"},{"data": "date"},{"data": "type_spotName"},{"data": "userName"},
+                        },{"data": "name"},{"data": "description"},{"data": "latitude"},{"data": "longitude"},{"data": "date"},{"data": "type_spotName"},{"data": "userName"},{"data": "start"},{"data": "end"},{"data": "status"},
                         {
                             "data" : "action",
                             "orderable": false,

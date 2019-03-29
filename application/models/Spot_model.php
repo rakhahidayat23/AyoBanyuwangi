@@ -17,7 +17,7 @@ class Spot_model extends CI_Model
 
     // datatables
     function json() {
-        $this->datatables->select('spot.id,spot.name,spot.description,spot.latitude,spot.longitude,spot.date,type_spot.name as type_spotName,user.name as userName');
+        $this->datatables->select('spot.id,spot.name,spot.description,spot.latitude,spot.longitude,spot.date,type_spot.name as type_spotName,user.name as userName,spot.start, spot.end, spot.status');
         $this->datatables->from('spot');
         //add this line for join
         $this->datatables->join('type_spot', 'spot.type_spot_id = type_spot.id');
@@ -36,7 +36,7 @@ class Spot_model extends CI_Model
     // get data by id
     function get_by_id($id)
     {
-        $this->datatables->select('spot.id,spot.name,spot.description,spot.latitude,spot.longitude,spot.date,type_spot.name as type_spotName,user.name as userName');
+        $this->datatables->select('spot.id,spot.name,spot.description,spot.latitude,spot.longitude,spot.date,type_spot.name as type_spotName,user.name as userName, spot.start, spot.end, spot.status');
         $this->db->where($this->id, $id);
         $this->datatables->join('type_spot', 'spot.type_spot_id = type_spot.id');
         $this->datatables->join('user', 'spot.user_id = user.id');
@@ -68,7 +68,10 @@ class Spot_model extends CI_Model
 	$this->db->or_like('longitude', $q);
 	$this->db->or_like('date', $q);
 	$this->db->or_like('type_spot_id', $q);
-	$this->db->or_like('user_id', $q);
+    $this->db->or_like('user_id', $q);
+    $this->db->or_like('start', $q);
+    $this->db->or_like('end', $q);
+    $this->db->or_like('status', $q);
 	$this->db->from($this->table);
         return $this->db->count_all_results();
     }

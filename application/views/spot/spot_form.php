@@ -37,7 +37,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label>Type Spot</label>
-                            <select  name="type_spot_id" id="spotype_spot_id" class="form-control border-input" <?php if(count($type_spot_data) == 0){ echo 'disabled';} ?>>
+                            <select  name="type_spot_id" id="type_spot_id" class="form-control border-input" <?php if(count($type_spot_data) == 0){ echo 'disabled';} ?>>
                                 <?php foreach ($type_spot_data as $key) { ?>
                                     <option value="<?= $key->id?>" <?php if($key->id == $type_spot_id){ echo 'selected';} ?>> <?= $key->name?></option>
                                 <?php } ?>
@@ -59,10 +59,19 @@
                     </div>
                 </div>
 
-	    <div class="form-group">
-            <label for="int">User Id <?php echo form_error('user_id') ?></label>
-            <input type="text" class="form-control" name="user_id" id="user_id" placeholder="User Id" value="<?php echo $user_id; ?>" />
+        <div class="form-group">
+            <label for="varchar">Start <?php echo form_error('start') ?></label>
+            <input type="text" class="form-control" name="start" id="start" placeholder="Start" value="<?php echo $start; ?>" />
         </div>
+        <div class="form-group">
+            <label for="varchar">End <?php echo form_error('end') ?></label>
+            <input type="text" class="form-control" name="end" id="end" placeholder="End" value="<?php echo $end; ?>" />
+        </div>
+        <div class="form-group">
+            <label for="varchar">Status <?php echo form_error('status') ?></label>
+            <input type="text" class="form-control" name="status" id="status" placeholder="Status" value="<?php echo $latitude; ?>" />
+        </div>
+	    
 	    <input type="hidden" name="id" value="<?php echo $id; ?>" /> 
 	    <button type="submit" class="btn btn-primary"><?php echo $button ?></button> 
 	    <a href="<?php echo site_url('spot') ?>" class="btn btn-default">Cancel</a>
