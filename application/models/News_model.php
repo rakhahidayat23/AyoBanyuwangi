@@ -17,7 +17,7 @@ class News_model extends CI_Model
 
     // datatables
     function json() {
-        $this->datatables->select('news.id,spot.name as id_spot,news.tanggal,news.judul,news.keterangan');
+        $this->datatables->select('news.id,spot.name as spotName,news.tanggal,news.judul,news.keterangan');
         $this->datatables->from('news');
         //add this line for join
         $this->datatables->join('spot', 'news.id_spot = spot.id');
@@ -35,7 +35,7 @@ class News_model extends CI_Model
     // get data by id
     function get_by_id($id)
     {
-        $this->datatables->select('news.id,spot.name as id_spot,news.tanggal,news.judul,news.keterangan, id_spot');
+        $this->datatables->select('news.id,spot.name as spotName,news.tanggal,news.judul,news.keterangan, id_spot');
         $this->db->where($this->id, $id);
         $this->db->join('spot', 'news.id_spot = spot.id');
         return $this->db->get($this->table)->row();

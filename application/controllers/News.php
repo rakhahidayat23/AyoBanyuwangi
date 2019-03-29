@@ -45,7 +45,7 @@ class News extends CI_Controller
 		'tanggal' => $row->tanggal,
 		'judul' => $row->judul,
         'keterangan' => $row->keterangan,
-        
+        'spotName' => $row->spotName,
         );
         $this->render['content']= $this->load->view('news/news_read', $data, TRUE);
             $this->load->view('template', $this->render);
@@ -62,7 +62,7 @@ class News extends CI_Controller
             'button' => 'Create',
             'action' => site_url('news/create_action'),
 	    'id' => set_value('id'),
-	    'spot_id' => set_value('spot_id'),
+	    'id_spot' => set_value('id_spot'),
 	    'tanggal' => set_value('tanggal'),
 	    'judul' => set_value('judul'),
         'keterangan' => set_value('keterangan'),
@@ -80,7 +80,7 @@ class News extends CI_Controller
             $this->create();
         } else {
             $data = array(
-		'spot_id' => $this->input->post('spot_id',TRUE),
+		'id_spot' => $this->input->post('id_spot',TRUE),
 		'tanggal' => $this->input->post('tanggal',TRUE),
 		'judul' => $this->input->post('judul',TRUE),
 		'keterangan' => $this->input->post('keterangan',TRUE),
@@ -102,7 +102,7 @@ class News extends CI_Controller
                 'button' => 'Update',
                 'action' => site_url('news/update_action'),
 		'id' => set_value('id', $row->id),
-		'spot_id' => set_value('spot_id', $row->spot_id),
+		'id_spot' => set_value('id_spot', $row->id_spot),
 		'tanggal' => set_value('tanggal', $row->tanggal),
 		'judul' => set_value('judul', $row->judul),
         'keterangan' => set_value('keterangan', $row->keterangan),
@@ -124,7 +124,7 @@ class News extends CI_Controller
             $this->update($this->input->post('id', TRUE));
         } else {
             $data = array(
-		'spot_id' => $this->input->post('spot_id',TRUE),
+		'id_spot' => $this->input->post('id_spot',TRUE),
 		'tanggal' => $this->input->post('tanggal',TRUE),
 		'judul' => $this->input->post('judul',TRUE),
 		'keterangan' => $this->input->post('keterangan',TRUE),
@@ -152,7 +152,7 @@ class News extends CI_Controller
 
     public function _rules() 
     {
-	$this->form_validation->set_rules('spot_id', 'id spot', 'trim|required');
+	$this->form_validation->set_rules('id_spot', 'id spot', 'trim|required');
 	$this->form_validation->set_rules('tanggal', 'tanggal', 'trim|required');
 	$this->form_validation->set_rules('judul', 'judul', 'trim|required');
 	$this->form_validation->set_rules('keterangan', 'keterangan', 'trim|required');

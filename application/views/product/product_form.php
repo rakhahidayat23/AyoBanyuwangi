@@ -6,6 +6,8 @@
         <div class="content">
             <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
                 <div class="row">
+                <div class="content table-responsive">    
+                <div class="row">
                     <div class="col-md-5">
                         <div class="form-group">
                             <label>Name</label>
