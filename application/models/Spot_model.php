@@ -7,7 +7,7 @@ class Spot_model extends CI_Model
 {
 
     public $table = 'spot';
-    public $id = 'id';
+    public $id = 'spot.id';
     public $order = 'DESC';
 
     function __construct()
@@ -36,7 +36,7 @@ class Spot_model extends CI_Model
     // get data by id
     function get_by_id($id)
     {
-        $this->datatables->select('spot.id,spot.name,spot.description,spot.latitude,spot.longitude,spot.date,type_spot.name as type_spotName,user.name as userName, spot.start, spot.end, spot.status');
+        $this->datatables->select('spot.id,spot.name,spot.description,spot.latitude,spot.longitude,spot.date,type_spot.name as type_spotName,user.name as userName, spot.start, spot.end, spot.status,type_spot_id');
         $this->db->where($this->id, $id);
         $this->datatables->join('type_spot', 'spot.type_spot_id = type_spot.id');
         $this->datatables->join('user', 'spot.user_id = user.id');

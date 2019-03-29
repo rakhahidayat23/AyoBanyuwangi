@@ -170,52 +170,52 @@
 
                 latlngset = new google.maps.LatLng(latitude, longitude);
                 if(type == 'ATM'){
-                    image = 'http://localhost/InsunBanyuwangi/assets/upload/atm.png';
+                    image_icon = 'http://localhost/InsunBanyuwangi/assets/upload/atm.png';
                     var marker = new google.maps.Marker({  
                         map: map, 
                         title: name , 
                         position: latlngset,
-                        icon : image, 
+                        icon : image_icon, 
                     });
 
                 }
                 else if(type == 'Mountain'){
-                    image = 'http://localhost/InsunBanyuwangi/assets/upload/mountain.png';
+                    image_icon = 'http://localhost/InsunBanyuwangi/assets/upload/mountain.png';
                     var marker = new google.maps.Marker({  
                         map: map, 
                         title: name , 
                         position: latlngset,
-                        icon : image, 
+                        icon : image_icon, 
                     });
 
                 }
                 else if(type == 'Beach'){
-                    image = 'http://localhost/InsunBanyuwangi/assets/upload/beach.png';
+                    image_icon = 'http://localhost/InsunBanyuwangi/assets/upload/beach.png';
                     var marker = new google.maps.Marker({  
                         map: map, 
                         title: name , 
                         position: latlngset,
-                        icon : image, 
+                        icon : image_icon, 
                     });
 
                 }
                 else if(type == 'Island'){
-                    image = 'http://localhost/InsunBanyuwangi/assets/upload/island.png';
+                    image_icon = 'http://localhost/InsunBanyuwangi/assets/upload/island.png';
                     var marker = new google.maps.Marker({  
                         map: map, 
                         title: name , 
                         position: latlngset,
-                        icon : image, 
+                        icon : image_icon, 
                     });
 
                 }
                 else if(type == 'Forest'){
-                    image = 'http://localhost/InsunBanyuwangi/assets/upload/forest.png';
+                    image_icon = 'http://localhost/InsunBanyuwangi/assets/upload/forest.png';
                     var marker = new google.maps.Marker({  
                         map: map, 
                         title: name , 
                         position: latlngset,
-                        icon : image, 
+                        icon : image_icon, 
                     });
 
                 }

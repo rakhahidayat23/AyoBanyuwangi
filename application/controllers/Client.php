@@ -202,7 +202,7 @@ class Client extends CI_Controller
          $config["num_links"] = floor($choice);
   
          // Membuat Style pagination untuk BootStrap v4
-       $config['first_link']       = 'First';
+         $config['first_link']       = 'First';
          $config['last_link']        = 'Last';
          $config['next_link']        = 'Next';
          $config['prev_link']        = 'Prev';
@@ -336,6 +336,26 @@ class Client extends CI_Controller
         //load view mahasiswa view
        $this->render['content']= $this->load->view('client_page/more',$data, TRUE);
        $this->load->view('templateClient', $this->render);
+    }
+    public function PayAction(){
+
+        $date = $this->input->post('date',TRUE);
+        // $hmac = $this->input->post('hmac',TRUE);
+        $respon = $this->req->getPayment($date);
+        echo $date;
+        var_dump($respon);
+    }
+    public function Pay(){
+        $auth_Bri = $this->req->auth();
+        $BarearToken = 'Bearer '.$auth_Bri->access_token;
+        
+        $data = array(
+            'token' => json_encode($BarearToken) ,
+        );
+
+        // var_dump($this->req->getPayment($BarearToken));
+        $this->render['content']= $this->load->view('client_page/event',$data, TRUE);
+        $this->load->view('templateClient', $this->render);
     }
 
 }
