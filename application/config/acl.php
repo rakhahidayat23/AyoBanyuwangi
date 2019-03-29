@@ -64,9 +64,7 @@ $acl = array(
 		'public'
 	),
 	'client' => array(
-		'Super Admin'  => true,
-		'Admin' => true,
-		'Umum' => false,
+		'public'
 	),
 	'gallery' => array(
 		'Super Admin'  => false,

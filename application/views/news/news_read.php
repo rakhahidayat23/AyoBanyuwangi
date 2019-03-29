@@ -6,7 +6,7 @@
         <div class="content">
             <div class="author">
 
-        <h4 class="title"><?php echo $id_spot; ?><br />
+        <h4 class="title"><?php echo $spotName; ?><br />
                     <small>Spot</small>
                 </h4>
             </div>
