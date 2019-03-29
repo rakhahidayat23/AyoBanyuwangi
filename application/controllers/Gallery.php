@@ -14,7 +14,7 @@ class Gallery extends CI_Controller
         {
             if (! $this->acl->is_allowed('gallery', $status))
             {
-                redirect('login/logout','refresh');
+                redirect('auth/logout_action','refresh');
             }
         }
         $this->load->model('Gallery_model');

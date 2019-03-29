@@ -15,7 +15,7 @@ class User extends CI_Controller
         {
             if (! $this->acl->is_allowed('user', $status))
             {
-                redirect('login/logout','refresh');
+                redirect('auth/logout_action','refresh');
             }
         }
         $this->load->model('User_model');

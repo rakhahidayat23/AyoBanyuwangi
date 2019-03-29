@@ -15,7 +15,7 @@ class Client extends CI_Controller
         {
             if (! $this->acl->is_allowed('client', $status))
             {
-                redirect('login/logout','refresh');
+                redirect('auth/logout_action','refresh');
             }
         }
 
@@ -103,7 +103,11 @@ class Client extends CI_Controller
         $review = $this->Review_model->get_by_spot($tmpSpot->id);
         if(!empty($ses)){
             $dataReview = count($this->Review_model->get_by_user($tmpSpot->id,$ses['id']));
-            $review_user = $this->Review_model->get_by_user($tmpSpot->id,$ses['id'])[$dataReview -1 ]->rating;
+            if($dataReview > 0){
+                $review_user = $this->Review_model->get_by_user($tmpSpot->id,$ses['id'])[$dataReview -1 ]->rating;
+            }else{
+                $review_user = 0;    
+            }
         }else{
             $review_user = 0;
         }

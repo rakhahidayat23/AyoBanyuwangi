@@ -53,7 +53,7 @@ http://www.templatemo.com/tm-511-journey
                             <div id="mainNav" class="collapse navbar-collapse tm-bg-white">
                                 <ul class="navbar-nav ml-auto">
                                   <li class="nav-item">
-                                    <a class="nav-link active" href="<?= base_url()?>product">Home <span class="sr-only">(current)</span></a>
+                                    <a class="nav-link active" href="<?= base_url()?>">Home <span class="sr-only">(current)</span></a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="<?= base_url()?>#tm-section-2">Top Destinations</a>
@@ -63,6 +63,9 @@ http://www.templatemo.com/tm-511-journey
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="<?= base_url()?>#tm-section-4">Maps</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="<?= base_url()?>auth">Login</a>
                                 </li>
                             </ul>
                         </div>                            
@@ -109,11 +112,7 @@ http://www.templatemo.com/tm-511-journey
                 $.scrollTo('#tm-section-2', 300, {easing:'linear'});
             });
 
-            // Update nav links on scroll
-            $('#tm-top-bar').singlePageNav({
-                currentClass:'active',
-                offset: 60
-            });
+            
 
             // Close navbar after clicked
             $('.nav-link').click(function(){

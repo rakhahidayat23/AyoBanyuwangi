@@ -15,7 +15,7 @@ class News extends CI_Controller
         {
             if (! $this->acl->is_allowed('news', $status))
             {
-                redirect('login/logout','refresh');
+                redirect('auth/logout_action','refresh');
             }
         }
         $this->load->model('News_model');
