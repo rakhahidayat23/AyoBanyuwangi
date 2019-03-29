@@ -6,12 +6,12 @@
         <div class="content">
             <div class="author">
 
-        <h4 class="title"><?php echo $spot_id; ?><br />
+        <h4 class="title"><?php echo $spotName; ?><br />
                     <small>Spot</small>
                 </h4>
             </div>
             <p class="spot text-center">
-                <?php echo $spot_id; ?>
+                <?php echo $id_spot; ?>
             </p>
 
             <hr>
@@ -34,7 +34,7 @@
     <!-- <body>
         <h2 style="margin-top:0px">News Read</h2>
         <table class="table">
-	    <tr><td>Id Spot</td><td><?php echo $spot_id; ?></td></tr>
+	    <tr><td>Id Spot</td><td><?php echo $id_spot; ?></td></tr>
 	    <tr><td>Tanggal</td><td><?php echo $tanggal; ?></td></tr>
 	    <tr><td>Judul</td><td><?php echo $judul; ?></td></tr>
 	    <tr><td>Keterangan</td><td><?php echo $keterangan; ?></td></tr>

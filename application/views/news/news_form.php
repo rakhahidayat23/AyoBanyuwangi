@@ -6,13 +6,22 @@
         <div class="content">
             <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
                 <div class="row">
-                    <div class="col-md-5">
-                        <div class="form-group">
-            <label>Spot</label>
-            <input type="text" class="form-control" name="spot_id" id="spot_id" placeholder="Id Spot" value="<?php echo $spot_id; ?>" />
+                <div class="content table-responsive">    
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label>Spot</label>
+                        <select  name="id_spot" id="id_spot" class="form-control border-input" <?php if(count($spot_data) == 0){ echo 'disabled';} ?>>
+                        <?php foreach ($spot_data as $key) { ?>
+                        <option value="<?= $key->id?>" <?php if($key->id == $id_spot){ echo 'selected';} ?>> <?= $key->name?></option>
+                        <?php } ?>
+                        </select>
+                        
+                    </div>
                 </div>
             </div>
 
+            
             <div class="col-md-4">
                 <div class="form-group">
             <label>Tanggal</label>

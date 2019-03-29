@@ -1,48 +1,26 @@
-<!doctype html>
-<html>
-    <head>
-        <title>harviacode.com - codeigniter crud generator</title>
-        <link rel="stylesheet" href="<?php echo base_url('assets/bootstrap/css/bootstrap.min.css') ?>"/>
-        <link rel="stylesheet" href="<?php echo base_url('assets/datatables/dataTables.bootstrap.css') ?>"/>
-        <link rel="stylesheet" href="<?php echo base_url('assets/datatables/dataTables.bootstrap.css') ?>"/>
-        <style>
-            .dataTables_wrapper {
-                min-height: 500px
-            }
-            
-            .dataTables_processing {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                width: 100%;
-                margin-left: -50%;
-                margin-top: -25px;
-                padding-top: 20px;
-                text-align: center;
-                font-size: 1.2em;
-                color:grey;
-            }
-            body{
-                padding: 15px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="row" style="margin-bottom: 10px">
-            <div class="col-md-4">
-                <h2 style="margin-top:0px">Spot List</h2>
-            </div>
-            <div class="col-md-4 text-center">
-                <div style="margin-top: 4px"  id="message">
-                    <?php echo $this->session->userdata('message') <> '' ? $this->session->userdata('message') : ''; ?>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <?php if(!empty($this->session->flashdata('message') )){ ?>
+                <div class="alert alert-success alert-dismissible fade in">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close" style="position: inherit;">&times;</a>
+                    <strong>Success!</strong> <?= $this->session->flashdata('message') ?>.
                 </div>
-            </div>
-            <div class="col-md-4 text-right">
-                <?php echo anchor(site_url('spot/create'), 'Create', 'class="btn btn-primary"'); ?>
-	    </div>
-        </div>
-        <table class="table table-bordered table-striped" id="mytable">
-            <thead>
+            <?php } ?>
+            <div class="card">
+                <div class="header">
+                    <h4 class="title">Spot List</h4>
+                    <p class="category">List Of Spot for Sale</p>
+                </div>
+
+                <div class="col-md-12 text-right">
+                    <?php echo anchor(site_url('spot/create'), 'Create', 'class="btn btn-primary"'); ?>
+                </div>
+                
+
+                <div class="content table-responsive">
+                <table class="table table-bordered table-striped" id="mytable">
+                <thead>
                 <tr>
                     <th width="80px">No</th>
 		    <th>Name</th>
@@ -52,12 +30,20 @@
 		    <th>Date</th>
 		    <th>Type Spot Id</th>
 		    <th>User Id</th>
+            <th>Start</th>
+            <th>End</th>
+            <th>Status</th>
 		    <th width="200px">Action</th>
                 </tr>
             </thead>
-	    
-        </table>
-        <script src="<?php echo base_url('assets/js/jquery-1.11.2.min.js') ?>"></script>
+                
+                </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="<?php echo base_url('assets/js/jquery-1.11.2.min.js') ?>"></script>
         <script src="<?php echo base_url('assets/datatables/jquery.dataTables.js') ?>"></script>
         <script src="<?php echo base_url('assets/datatables/dataTables.bootstrap.js') ?>"></script>
         <script type="text/javascript">
@@ -96,7 +82,7 @@
                         {
                             "data": "id",
                             "orderable": false
-                        },{"data": "name"},{"data": "description"},{"data": "latitude"},{"data": "longitude"},{"data": "date"},{"data": "type_spot_id"},{"data": "user_id"},
+                        },{"data": "name"},{"data": "description"},{"data": "latitude"},{"data": "longitude"},{"data": "date"},{"data": "type_spotName"},{"data": "userName"},{"data": "start"},{"data": "end"},{"data": "status"},
                         {
                             "data" : "action",
                             "orderable": false,
@@ -114,5 +100,3 @@
                 });
             });
         </script>
-    </body>
-</html>
