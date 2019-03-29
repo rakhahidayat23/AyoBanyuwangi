@@ -37,6 +37,29 @@ class Client extends CI_Controller
         $type_spot = $this->Type_spot_model->get_all();
         $spot = $this->Spot_model->get_all();
 
+        $auth_Bri = $this->req->auth();
+
+        $BarearToken = 'Bearer '.$auth_Bri->access_token;
+
+        $location_atm = $this->req->get_atm($BarearToken,'-8.208698000000016','114.37390900000003');
+
+        foreach ($location_atm->data as $key) {
+            $tmpArray = array(
+                'id' => $key->tid,
+                'name' => "ATM BRI", 
+                'alamat' => $key->alamat, 
+                'lokasi' => $key->lokasi,
+                'latitude' => $key->latitude, 
+                'longitude' => $key->longitude, 
+                'type' => "ATM", 
+            );
+            array_push($spotList,$tmpArray);
+        }
+
+        // var_dump($location_atm->data);
+
+        
+
         foreach ($spot as $keySpot) {
             $offset=6*60*60;
             $date1 = DateTime::createFromFormat('H:i a', date("H:i a",time() + $offset));
@@ -65,7 +88,7 @@ class Client extends CI_Controller
                 'longitude' => $keySpot->longitude, 
                 'type' => $tmpType->name, 
             );
-            // var_dump($tmpImage);
+            
             array_push($spotList,$tmpArray);
         }
 

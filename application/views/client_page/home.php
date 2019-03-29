@@ -123,6 +123,7 @@
     /* Google Maps------------------------------------------------*/
     var mapsList = JSON.parse('<?php echo $listMaps ?>');
     
+    
     var map = '';
     var center;
 
@@ -148,24 +149,104 @@
 
         function setMarkers(map,locations){
             for (i = 0; i < locations.length; i++){  
-                var description = locations[i]['description']
-                var image = locations[i]['image']
-                var latitude = locations[i]['latitude']
-                var longitude =  locations[i]['longitude']
-                var name =  locations[i]['name']
                 var type =  locations[i]['type']
-                var id =  locations[i]['id']
+
+                if(type == 'ATM'){
+                    var location = locations[i]['lokasi']
+                    var alamat = locations[i]['alamat']
+                    var latitude = locations[i]['latitude']
+                    var longitude =  locations[i]['longitude']
+                    var name =  locations[i]['name']
+                    var id =  locations[i]['id']
+                }else{
+                    var description = locations[i]['description']
+                    var image = locations[i]['image']
+                    var latitude = locations[i]['latitude']
+                    var longitude =  locations[i]['longitude']
+                    var name =  locations[i]['name']
+                    var id =  locations[i]['id']
+                }
 
 
                 latlngset = new google.maps.LatLng(latitude, longitude);
+                if(type == 'ATM'){
+                    image = 'http://localhost/InsunBanyuwangi/assets/upload/atm.png';
+                    var marker = new google.maps.Marker({  
+                        map: map, 
+                        title: name , 
+                        position: latlngset,
+                        icon : image, 
+                    });
 
-                var marker = new google.maps.Marker({  
-                    map: map, title: name , position: latlngset  
-                });
+                }
+                else if(type == 'Mountain'){
+                    image = 'http://localhost/InsunBanyuwangi/assets/upload/mountain.png';
+                    var marker = new google.maps.Marker({  
+                        map: map, 
+                        title: name , 
+                        position: latlngset,
+                        icon : image, 
+                    });
+
+                }
+                else if(type == 'Beach'){
+                    image = 'http://localhost/InsunBanyuwangi/assets/upload/beach.png';
+                    var marker = new google.maps.Marker({  
+                        map: map, 
+                        title: name , 
+                        position: latlngset,
+                        icon : image, 
+                    });
+
+                }
+                else if(type == 'Island'){
+                    image = 'http://localhost/InsunBanyuwangi/assets/upload/island.png';
+                    var marker = new google.maps.Marker({  
+                        map: map, 
+                        title: name , 
+                        position: latlngset,
+                        icon : image, 
+                    });
+
+                }
+                else if(type == 'Forest'){
+                    image = 'http://localhost/InsunBanyuwangi/assets/upload/forest.png';
+                    var marker = new google.maps.Marker({  
+                        map: map, 
+                        title: name , 
+                        position: latlngset,
+                        icon : image, 
+                    });
+
+                }
+                else{
+                    var marker = new google.maps.Marker({  
+                        map: map, 
+                        title: name , 
+                        position: latlngset  
+                    });
+                }
+
                 map.setCenter(marker.getPosition())
 
+                if(type == 'ATM'){
+                    var content = '<div class="container-fluid">'+
+                            '<div class="row">'+
+                            '<div class="col-md-12">'+
+                            '<h3 class="text-center">'+name+'</h3>'+
+                            '<hr>'+
+                            '<div class="row">'+
+                            '<div class="col-md-12">'+
+                            '<p> Location : '+location+'</p>'+
+                            '<p> Alamat : '+alamat+'</p>'+
+                            '</div>'+
+                            '</div>'+
+                            '</div>'+
+                            '</div>'+
+                            '</div>';
 
-                var content = '<div class="container-fluid">'+
+                }else{
+                    var content = '<div class="container-fluid">'+
                             '<div class="row">'+
                             '<div class="col-md-12">'+
                             '<h3 class="text-center">'+name+'</h3>'+
@@ -185,6 +266,7 @@
                             '</div>'+
                             '</div>'+
                             '</div>';
+                }
 
                 var infowindow = new google.maps.InfoWindow()
 
