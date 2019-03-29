@@ -9,6 +9,16 @@ class Client extends CI_Controller
     {
         parent::__construct();
         
+        $data = $this->session->userdata('logged_in');
+        $status = $data['level'];
+        if (! $this->acl->is_public('client'))
+        {
+            if (! $this->acl->is_allowed('client', $status))
+            {
+                redirect('login/logout','refresh');
+            }
+        }
+
         $this->load->model('Type_spot_model');
         $this->load->model('Spot_model');
         $this->load->model('Review_model');
@@ -92,8 +102,8 @@ class Client extends CI_Controller
         $tmpSpot = $this->Spot_model->get_by_id($id);
         $review = $this->Review_model->get_by_spot($tmpSpot->id);
         if(!empty($ses)){
-            $dataReview = count($this->Review_model->get_by_spotUser($tmpSpot->id,$ses['id']));
-            $review_user = $this->Review_model->get_by_spotUser($tmpSpot->id,$ses['id'])[$dataReview -1 ]->rating;
+            $dataReview = count($this->Review_model->get_by_user($tmpSpot->id,$ses['id']));
+            $review_user = $this->Review_model->get_by_user($tmpSpot->id,$ses['id'])[$dataReview -1 ]->rating;
         }else{
             $review_user = 0;
         }

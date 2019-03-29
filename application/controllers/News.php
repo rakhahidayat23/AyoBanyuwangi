@@ -8,10 +8,20 @@ class News extends CI_Controller
     function __construct()
     {
         parent::__construct();
+        $data = $this->session->userdata('logged_in');
+        $status = $data['level'];
+
+        if (! $this->acl->is_public('news'))
+        {
+            if (! $this->acl->is_allowed('news', $status))
+            {
+                redirect('login/logout','refresh');
+            }
+        }
         $this->load->model('News_model');
         $this->load->model('spot_model');
         $this->load->library('form_validation');        
-	$this->load->library('datatables');
+	    $this->load->library('datatables');
     }
 
     public function index()

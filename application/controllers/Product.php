@@ -8,6 +8,17 @@ class Product extends CI_Controller
     function __construct()
     {
         parent::__construct();
+        $data = $this->session->userdata('logged_in');
+        $status = $data['level'];
+
+        if (! $this->acl->is_public('product'))
+        {
+            if (! $this->acl->is_allowed('product', $status))
+            {
+                redirect('login/logout','refresh');
+            }
+        }
+
         $this->load->model('Product_model');
         $this->load->model('spot_model');
         $this->load->library('form_validation');        

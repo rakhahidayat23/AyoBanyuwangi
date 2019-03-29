@@ -17,7 +17,7 @@ class Review_model extends CI_Model
 
     // datatables
     function json() {
-        $this->datatables->select('id,review,date,rating,spot.name as spot_id, user.name as user_id');
+        $this->datatables->select('review.id,review,review.date,rating,spot.name as spot_id, user.name as user_id');
         $this->datatables->from('review');
         //add this line for join
         //$this->datatables->join('table2', 'review.field = table2.field');

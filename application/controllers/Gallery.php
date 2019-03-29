@@ -8,15 +8,13 @@ class Gallery extends CI_Controller
     function __construct()
     {
         parent::__construct();
-        $this->load->library('acl');
-        
         $data = $this->session->userdata('logged_in');
         $status = $data['level'];
         if (! $this->acl->is_public('gallery'))
         {
             if (! $this->acl->is_allowed('gallery', $status))
             {
-                redirect('auth/logout_action','refresh');
+                redirect('login/logout','refresh');
             }
         }
         $this->load->model('Gallery_model');

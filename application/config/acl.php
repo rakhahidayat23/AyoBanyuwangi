@@ -66,37 +66,52 @@ $acl = array(
 	'client' => array(
 		'Super Admin'  => true,
 		'Admin' => true,
-		'Umum' => true,
+		'Umum' => false,
 	),
 	'gallery' => array(
 		'Super Admin'  => false,
 		'Admin' => true,
-		'Umum' => true,
+		'Umum' => false,
 	),
 	'news' => array(
 		'Super Admin'  => true,
 		'Admin' => true,
-		'Umum' => true,
+		'Umum' => false,
 	),
 	'product' => array(
 		'Super Admin'  => true,
 		'Admin' => true,
-		'Umum' => true,
+		'Umum' => false,
 	),
-	'review' => array(
+	'review/index' => array(
 		'Super Admin'  => true,
 		'Admin' => true,
-		'Umum' => true,
+		'Umum' => false,
+	),
+	'review/create' => array(
+		'Super Admin'  => true,
+		'Admin' => true,
+		'Umum' => false,
+	),
+	'review/update' => array(
+		'Super Admin'  => true,
+		'Admin' => true,
+		'Umum' => false,
+	),
+	'review/delete' => array(
+		'Super Admin'  => true,
+		'Admin' => true,
+		'Umum' => false,
 	),
 	'spot' => array(
 		'Super Admin'  => true,
 		'Admin' => true,
-		'Umum' => true,
+		'Umum' => false,
 	),
 	'user' => array(
 		'Super Admin'  => true,
-		'Admin' => true,
-		'Umum' => true,
+		'Admin' => false,
+		'Umum' => false,
 	),
 	
 );

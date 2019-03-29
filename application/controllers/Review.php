@@ -8,15 +8,17 @@ class Review extends CI_Controller
     function __construct()
     {
         parent::__construct();
+
         $this->load->model('Review_model');
         $this->load->model('spot_model');
         $this->load->model('user_model');
         $this->load->library('form_validation');        
-	$this->load->library('datatables');
+	    $this->load->library('datatables');
     }
 
     public function index()
     {
+        $this->cek_status('review/index');
         $this->render['content']= $this->load->view('review/review_list', array(), TRUE);
         $this->load->view('template', $this->render);
     } 
@@ -28,6 +30,7 @@ class Review extends CI_Controller
 
     public function read($id) 
     {
+        $this->cek_status('review/read');
         $row = $this->Review_model->get_by_id($id);
         if ($row) {
             $data = array(
@@ -47,6 +50,7 @@ class Review extends CI_Controller
 
     public function create() 
     {
+        $this->cek_status('review/create');
         $data = array(
             'button' => 'Create',
             'action' => site_url('review/create_action'),
@@ -83,6 +87,7 @@ class Review extends CI_Controller
     
     public function update($id) 
     {
+        $this->cek_status('review/update');
         $row = $this->Review_model->get_by_id($id);
 
         if ($row) {
@@ -105,6 +110,7 @@ class Review extends CI_Controller
     
     public function update_action() 
     {
+        
         $this->_rules();
 
         if ($this->form_validation->run() == FALSE) {
@@ -126,6 +132,8 @@ class Review extends CI_Controller
     
     public function delete($id) 
     {
+        $this->cek_status('review/delete');
+
         $row = $this->Review_model->get_by_id($id);
 
         if ($row) {
@@ -135,6 +143,17 @@ class Review extends CI_Controller
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('review'));
+        }
+    }
+    public function cek_status($path){
+        $data = $this->session->userdata('logged_in');
+        $status = $data['level'];
+        if (! $this->acl->is_public($path))
+        {
+            if (! $this->acl->is_allowed($path, $status))
+            {
+                redirect('login/logout','refresh');
+            }
         }
     }
 
