@@ -44,7 +44,7 @@ http://www.templatemo.com/tm-511-journey
                     <div class="row">
                         <nav class="navbar navbar-expand-lg narbar-light">
                             <a class="navbar-brand mr-auto" href="<?= base_url()?>">
-                                <img src= "<?= base_url()?>assets/user/img/logo.png" alt="Site logo">
+                                <img src= "<?= base_url()?>assets/upload/ayologo.png" alt="Site logo">
                                 Ayo Banyuwangi
                             </a>
                             <button type="button" id="nav-toggle" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#mainNav" aria-expanded="false" aria-label="Toggle navigation">

@@ -69,53 +69,49 @@
     	<div class="sidebar-wrapper">
             <div class="logo">
                 <a href="http://www.creative-tim.com" class="simple-text">
+                 <img src= "<?= base_url()?>assets/upload/ayologo.png" width="20%" alt="Site logo">
                     Ayo Banyuwangi
                 </a>
             </div>
 
             <ul class="nav">
-                <li <?php if($this->uri->segment(1) == 'Dashboard'){echo 'class="active"';} ?>>
-                    <a href="dashboard.html">
-                        <i class="ti-panel"></i>
-                        <p>Dashboard</p>
-                    </a>
-                </li>
+      
                 <li <?php if($this->uri->segment(1) == 'product'){echo 'class="active"';} ?>>
                     <a href="<?= base_url()?>product">
-                        <i class="ti-user"></i>
+                        <i class="ti-view-list-alt"></i>
                         <p>Product</p>
                     </a>
                 </li>
-                <li <?php if($this->uri->segment(1) == 'Dashboard'){echo 'class="active"';} ?>>
-                    <a href="table.html">
-                        <i class="ti-view-list-alt"></i>
-                        <p>Table List</p>
-                    </a>
-                </li>
-                <li <?php if($this->uri->segment(1) == 'Dashboard'){echo 'class="active"';} ?>>
-                    <a href="typography.html">
-                        <i class="ti-text"></i>
-                        <p>Typography</p>
-                    </a>
-                </li>
-                <li <?php if($this->uri->segment(1) == 'Dashboard'){echo 'class="active"';} ?>>
-                    <a href="icons.html">
-                        <i class="ti-pencil-alt2"></i>
-                        <p>Icons</p>
-                    </a>
-                </li>
-                <li <?php if($this->uri->segment(1) == 'Dashboard'){echo 'class="active"';} ?>>
-                    <a href="maps.html">
+                <li <?php if($this->uri->segment(1) == 'spot'){echo 'class="active"';} ?>>
+                    <a href="<?= base_url()?>spot">
                         <i class="ti-map"></i>
-                        <p>Maps</p>
+                        <p>Spot</p>
                     </a>
                 </li>
-                <li <?php if($this->uri->segment(1) == 'Dashboard'){echo 'class="active"';} ?>>
+                <li <?php if($this->uri->segment(1) == 'news'){echo 'class="active"';} ?>>
+                    <a href="<?= base_url()?>news">
+                        <i class="ti-text"></i>
+                        <p>News</p>
+                    </a>
+                </li>
+                <li <?php if($this->uri->segment(1) == 'event'){echo 'class="active"';} ?>>
+                    <a href="<?= base_url()?>event">
+                        <i class="ti-pencil-alt2"></i>
+                        <p>Events</p>
+                    </a>
+                </li>
+                <li <?php if($this->uri->segment(1) == 'review'){echo 'class="active"';} ?>>
+                    <a href="<?= base_url()?>review">
+                        <i class="ti-pencil"></i>
+                        <p>Review</p>
+                    </a>
+                </li>
+                <!-- <li <?php if($this->uri->segment(1) == 'Dashboard'){echo 'class="active"';} ?>>
                     <a href="notifications.html">
                         <i class="ti-bell"></i>
                         <p>Notifications</p>
                     </a>
-                </li>
+                </li> -->
             </ul>
     	</div>
     </div>

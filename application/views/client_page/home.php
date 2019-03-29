@@ -5,7 +5,7 @@
             <div class="row tm-banner-row tm-banner-row-header">
                 <div class="col-xs-12">
                     <div class="tm-banner-header">
-                        <h1 class="text-uppercase tm-banner-title">Let's begin</h1>
+                        <h1 class="text-uppercase tm-banner-title">Ayo ke Banyuwangi !</h1>
                         <img src= "<?= base_url()?>assets/user/img/dots-3.png" alt="Dots">
                         <p class="tm-banner-subtitle">We assist you to choose the best.</p>
                         <a href="javascript:void(0)" class="tm-down-arrow-link"><i class="fa fa-2x fa-angle-down tm-down-arrow"></i></a>       
