@@ -103,6 +103,11 @@ $acl = array(
 		'Admin' => true,
 		'Umum' => false,
 	),
+	'review/read' => array(
+		'Super Admin'  => true,
+		'Admin' => true,
+		'Umum' => false,
+	),
 	'spot' => array(
 		'Super Admin'  => true,
 		'Admin' => true,
