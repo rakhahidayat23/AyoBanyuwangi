@@ -15,7 +15,7 @@ class Spot extends CI_Controller
         {
             if (! $this->acl->is_allowed('spot', $status))
             {
-                redirect('login/logout','refresh');
+                redirect('auth/logout_action','refresh');
             }
         }
         $this->load->model('Spot_model');

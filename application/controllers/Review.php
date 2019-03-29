@@ -117,12 +117,12 @@ class Review extends CI_Controller
             $this->update($this->input->post('id', TRUE));
         } else {
             $data = array(
-		'review' => $this->input->post('review',TRUE),
-		'date' => $this->input->post('date',TRUE),
-		'rating' => $this->input->post('rating',TRUE),
-		'spot_id' => $this->input->post('spot_id',TRUE),
-		'user_id' => $this->input->post('user_id',TRUE),
-	    );
+                'review' => $this->input->post('review',TRUE),
+                'date' => $this->input->post('date',TRUE),
+                'rating' => $this->input->post('rating',TRUE),
+                'spot_id' => $this->input->post('spot_id',TRUE),
+                'user_id' => $this->input->post('user_id',TRUE),
+	        );
 
             $this->Review_model->update($this->input->post('id', TRUE), $data);
             $this->session->set_flashdata('message', 'Update Record Success');
@@ -152,7 +152,7 @@ class Review extends CI_Controller
         {
             if (! $this->acl->is_allowed($path, $status))
             {
-                redirect('login/logout','refresh');
+                redirect('auth/logout_action','refresh');
             }
         }
     }

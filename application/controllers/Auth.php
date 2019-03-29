@@ -46,7 +46,7 @@ class Auth extends CI_Controller
                $this->set_cookis('password',$password);
             }
             // var_dump($this->input->cookie('username',true));
-            redirect(site_url('news'));
+            redirect(site_url('spot'));
         }else{
             $this->session->set_flashdata('error_message', 'invalid username or password');
             redirect(site_url('auth'));
