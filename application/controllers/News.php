@@ -45,7 +45,7 @@ class News extends CI_Controller
 		'tanggal' => $row->tanggal,
 		'judul' => $row->judul,
         'keterangan' => $row->keterangan,
-        'spotName' => $row->spotName,
+        
         );
         $this->render['content']= $this->load->view('news/news_read', $data, TRUE);
             $this->load->view('template', $this->render);

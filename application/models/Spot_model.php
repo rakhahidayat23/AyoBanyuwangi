@@ -17,10 +17,11 @@ class Spot_model extends CI_Model
 
     // datatables
     function json() {
-        $this->datatables->select('id,name,description,latitude,longitude,date,type_spot_id,user_id');
+        $this->datatables->select('spot.id,spot.name,spot.description,spot.latitude,spot.longitude,spot.date,type_spot.name as type_spotName,user.name as userName');
         $this->datatables->from('spot');
         //add this line for join
-        //$this->datatables->join('table2', 'spot.field = table2.field');
+        $this->datatables->join('type_spot', 'spot.type_spot_id = type_spot.id');
+        $this->datatables->join('user', 'spot.user_id = user.id');
         $this->datatables->add_column('action', anchor(site_url('spot/read/$1'),'Read')." | ".anchor(site_url('spot/update/$1'),'Update')." | ".anchor(site_url('spot/delete/$1'),'Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'), 'id');
         return $this->datatables->generate();
     }
@@ -35,7 +36,10 @@ class Spot_model extends CI_Model
     // get data by id
     function get_by_id($id)
     {
+        $this->datatables->select('spot.id,spot.name,spot.description,spot.latitude,spot.longitude,spot.date,type_spot.name as type_spotName,user.name as userName');
         $this->db->where($this->id, $id);
+        $this->datatables->join('type_spot', 'spot.type_spot_id = type_spot.id');
+        $this->datatables->join('user', 'spot.user_id = user.id');
         return $this->db->get($this->table)->row();
     }
     // get data by id

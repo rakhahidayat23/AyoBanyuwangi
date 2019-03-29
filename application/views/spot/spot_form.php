@@ -32,10 +32,33 @@
             <label for="datetime">Date <?php echo form_error('date') ?></label>
             <input type="text" class="form-control" name="date" id="date" placeholder="Date" value="<?php echo $date; ?>" />
         </div>
-	    <div class="form-group">
-            <label for="int">Type Spot Id <?php echo form_error('type_spot_id') ?></label>
-            <input type="text" class="form-control" name="type_spot_id" id="type_spot_id" placeholder="Type Spot Id" value="<?php echo $type_spot_id; ?>" />
-        </div>
+
+        <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Type Spot</label>
+                            <select  name="type_spot_id" id="spotype_spot_id" class="form-control border-input" <?php if(count($type_spot_data) == 0){ echo 'disabled';} ?>>
+                                <?php foreach ($type_spot_data as $key) { ?>
+                                    <option value="<?= $key->id?>" <?php if($key->id == $type_spot_id){ echo 'selected';} ?>> <?= $key->name?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+        <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>User</label>
+                            <select  name="user_id" id="user_id" class="form-control border-input" <?php if(count($user_data) == 0){ echo 'disabled';} ?>>
+                                <?php foreach ($user_data as $key) { ?>
+                                    <option value="<?= $key->id?>" <?php if($key->id == $user_id){ echo 'selected';} ?>> <?= $key->name?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
 	    <div class="form-group">
             <label for="int">User Id <?php echo form_error('user_id') ?></label>
             <input type="text" class="form-control" name="user_id" id="user_id" placeholder="User Id" value="<?php echo $user_id; ?>" />

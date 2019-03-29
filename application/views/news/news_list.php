@@ -9,15 +9,15 @@
             <?php } ?>
             <div class="card">
                 <div class="header">
-                    <h4 class="title">Product List</h4>
-                    <p class="category">List Of Product for Sale</p>
+                    <h4 class="title">News List</h4>
+                    <p class="category">List Of News for Sale</p>
                 </div>
             
             <div class="col-md-12 text-right">
                 <?php echo anchor(site_url('news/create'), 'Create', 'class="btn btn-primary"'); ?>
 	    </div>
 
-        
+        <div class="content table-responsive">
         <table class="table table-bordered table-striped" id="mytable">
             <thead>
                 <tr>

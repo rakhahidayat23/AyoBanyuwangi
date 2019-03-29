@@ -19,13 +19,16 @@ class Spot extends CI_Controller
             }
         }
         $this->load->model('Spot_model');
+        $this->load->model('type_spot_model');
+        $this->load->model('user_model');
         $this->load->library('form_validation');        
 	    $this->load->library('datatables');
     }
 
     public function index()
     {
-        $this->load->view('spot/spot_list');
+        $this->render['content']= $this->load->view('spot/spot_list', array(), TRUE);
+        $this->load->view('template', $this->render);
     } 
     
     public function json() {
@@ -44,10 +47,12 @@ class Spot extends CI_Controller
 		'latitude' => $row->latitude,
 		'longitude' => $row->longitude,
 		'date' => $row->date,
-		'type_spot_id' => $row->type_spot_id,
-		'user_id' => $row->user_id,
-	    );
-            $this->load->view('spot/spot_read', $data);
+		'type_spotName' => $row->type_spotName,
+		'userName' => $row->userName,
+        );
+        $this->render['content']= $this->load->view('spot/spot_read', $data, TRUE);
+            $this->load->view('template', $this->render);
+            
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('spot'));
@@ -66,9 +71,11 @@ class Spot extends CI_Controller
 	    'longitude' => set_value('longitude'),
 	    'date' => set_value('date'),
 	    'type_spot_id' => set_value('type_spot_id'),
-	    'user_id' => set_value('user_id'),
+        'user_id' => set_value('user_id'),
+        
 	);
-        $this->load->view('spot/spot_form', $data);
+    $this->render['content']= $this->load->view('spot/spot_form', $data, TRUE);
+    $this->load->view('template', $this->render);
     }
     
     public function create_action() 
@@ -83,7 +90,7 @@ class Spot extends CI_Controller
 		'description' => $this->input->post('description',TRUE),
 		'latitude' => $this->input->post('latitude',TRUE),
 		'longitude' => $this->input->post('longitude',TRUE),
-		'date' => $this->input->post('date',TRUE),
+		'date' => date("Y-m-d H:i:s"),
 		'type_spot_id' => $this->input->post('type_spot_id',TRUE),
 		'user_id' => $this->input->post('user_id',TRUE),
 	    );
@@ -110,8 +117,9 @@ class Spot extends CI_Controller
 		'date' => set_value('date', $row->date),
 		'type_spot_id' => set_value('type_spot_id', $row->type_spot_id),
 		'user_id' => set_value('user_id', $row->user_id),
-	    );
-            $this->load->view('spot/spot_form', $data);
+        );
+            $this->render['content']= $this->load->view('spot/spot_form', $data, TRUE);
+            $this->load->view('template', $this->render);
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('spot'));
