@@ -7,7 +7,7 @@ class Event_model extends CI_Model
 {
 
     public $table = 'event';
-    public $id = 'id';
+    public $id = 'event.id';
     public $order = 'DESC';
 
     function __construct()
@@ -46,10 +46,10 @@ class Event_model extends CI_Model
     // get total rows
     function total_rows($q = NULL) {
         $this->db->like('id', $q);
-	$this->db->or_like('nama', $q);
-	$this->db->or_like('tanggal', $q);
-	$this->db->or_like('lokasi', $q);
-	$this->db->or_like('deskripsi', $q);
+	$this->db->or_like('name', $q);
+	$this->db->or_like('date', $q);
+	$this->db->or_like('location', $q);
+	$this->db->or_like('description', $q);
 	$this->db->or_like('image', $q);
 	$this->db->or_like('user_id', $q);
     $this->db->or_like('spot_id', $q);
@@ -62,10 +62,10 @@ class Event_model extends CI_Model
     function get_limit_data($limit, $start = 0, $q = NULL) {
         $this->db->order_by($this->id, $this->order);
         $this->db->like('id', $q);
-	$this->db->or_like('nama', $q);
-	$this->db->or_like('tanggal', $q);
-	$this->db->or_like('lokasi', $q);
-	$this->db->or_like('deskripsi', $q);
+	$this->db->or_like('name', $q);
+	$this->db->or_like('date', $q);
+	$this->db->or_like('location', $q);
+	$this->db->or_like('description', $q);
 	$this->db->or_like('image', $q);
 	$this->db->or_like('user_id', $q);
     $this->db->or_like('spot_id', $q);

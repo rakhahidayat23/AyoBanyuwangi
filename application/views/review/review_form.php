@@ -10,7 +10,7 @@
             <div class="col-md-5">
                 <div class="form-group">
             <label>Spot</label>
-            <input type="text" class="form-control" name="spot_id" id="spot_id" placeholder="Id Spot" value="<?php echo $spot_id; ?>" />
+            <input type="text" class="form-control" name="spotName" id="spotName" placeholder="Id Spot" value="<?php echo $spotName; ?>" />
                 </div>
             </div>
 
@@ -35,18 +35,30 @@
         </div>
         </div>
 
-	    <div class="col-md-4">
+        <div class="row">
+            <div class="col-md-12">
                 <div class="form-group">
-            <label>Spot Id</label>
-            <input type="text" class="form-control" name="spot_id" id="spot_id" placeholder="Spot Id" value="<?php echo $spot_id; ?>" />
-        </div>
+                     <label>Spot</label>
+                     <select  name="spot_id" id="spot_id" class="form-control border-input" <?php if(count($spot_data) == 0){ echo 'disabled';} ?>>
+                     <?php foreach ($spot_data as $key) { ?>
+                     <option value="<?= $key->id?>" <?php if($key->id == $spot_id){ echo 'selected';} ?>> <?= $key->name?></option>
+                     <?php } ?>
+                     </select>
+                </div>
+            </div>
         </div>
 
-	    <div class="col-md-4">
+	    <div class="row">
+            <div class="col-md-12">
                 <div class="form-group">
-            <label>User Id</label>
-            <input type="text" class="form-control" name="user_id" id="user_id" placeholder="User Id" value="<?php echo $user_id; ?>" />
-        </div>
+                     <label>User</label>
+                     <select  name="user_id" id="user_id" class="form-control border-input" <?php if(count($user_data) == 0){ echo 'disabled';} ?>>
+                     <?php foreach ($user_data as $key) { ?>
+                     <option value="<?= $key->id?>" <?php if($key->id == $user_id){ echo 'selected';} ?>> <?= $key->name?></option>
+                     <?php } ?>
+                     </select>
+                </div>
+            </div>
         </div>
 
         <input type="hidden" name="id" value="<?php echo $id; ?>" /> 

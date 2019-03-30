@@ -27,8 +27,8 @@
 		    <th>Tanggal</th>
 		    <th>Lokasi</th>
 		    <th>Deskripsi</th>
-		    <th>Image</th>
-		    <th>User</th>
+		    <!-- <th>Image</th> -->
+		    <!-- <th>User</th> -->
 		    <th>Spot</th>
             <th>Price</th>
 		    <th width="200px">Action</th>
@@ -75,7 +75,7 @@
                         {
                             "data": "id",
                             "orderable": false
-                        },{"data": "name"},{"data": "date"},{"data": "location"},{"data": "description"},{"data": "image"},{"data": "userName"},{"data": "spotName"},{"data": "price"},
+                        },{"data": "name"},{"data": "date"},{"data": "location"},{"data": "description"},{"data": "spotName"},{"data": "price"},
                         {
                             "data" : "action",
                             "orderable": false,

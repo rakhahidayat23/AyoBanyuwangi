@@ -7,7 +7,7 @@ class User_model extends CI_Model
 {
 
     public $table = 'user';
-    public $id = 'id';
+    public $id = 'user.id';
     public $order = 'DESC';
 
     function __construct()
@@ -17,7 +17,7 @@ class User_model extends CI_Model
 
     // datatables
     function json() {
-        $this->datatables->select('id,name,username,password,email,phone,image,date,level_user_id');
+        $this->datatables->select('user.id,user.name,user.username,user.password,user.email,user.phone,user.image,user.date,user.level_user_id');
         $this->datatables->from('user');
         //add this line for join
         //$this->datatables->join('table2', 'user.field = table2.field');

@@ -1,7 +1,7 @@
-div class="col-lg-12 col-md-12">
+<div class="col-lg-12 col-md-12">
     <div class="card">
         <div class="header">
-            <h4 class="title">Product <?php echo $button ?></h4>
+            <h4 class="title">Event <?php echo $button ?></h4>
         </div>
         <div class="content">
             <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
@@ -48,7 +48,20 @@ div class="col-lg-12 col-md-12">
             <div class="col-md-12">
                 <div class="form-group">
                      <label>User</label>
-                     <select  name="user_id" id="user_id" class="form-control border-input" <?php if(count($spot_data) == 0){ echo 'disabled';} ?>>
+                     <select  name="user_id" id="user_id" class="form-control border-input" <?php if(count($user_data) == 0){ echo 'disabled';} ?>>
+                     <?php foreach ($user_data as $key) { ?>
+                     <option value="<?= $key->id?>" <?php if($key->id == $user_id){ echo 'selected';} ?>> <?= $key->name?></option>
+                     <?php } ?>
+                     </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                     <label>Spot</label>
+                     <select  name="spot_id" id="spot_id" class="form-control border-input" <?php if(count($spot_data) == 0){ echo 'disabled';} ?>>
                      <?php foreach ($spot_data as $key) { ?>
                      <option value="<?= $key->id?>" <?php if($key->id == $spot_id){ echo 'selected';} ?>> <?= $key->name?></option>
                      <?php } ?>
@@ -56,13 +69,10 @@ div class="col-lg-12 col-md-12">
                 </div>
             </div>
         </div>
+
 	    <div class="form-group">
-            <label for="int">Id User <?php echo form_error('id_user') ?></label>
-            <input type="text" class="form-control" name="id_user" id="id_user" placeholder="Id User" value="<?php echo $id_user; ?>" />
-        </div>
-	    <div class="form-group">
-            <label for="int">Id Spot <?php echo form_error('id_spot') ?></label>
-            <input type="text" class="form-control" name="id_spot" id="id_spot" placeholder="Id Spot" value="<?php echo $id_spot; ?>" />
+            <label for="int">Price <?php echo form_error('price') ?></label>
+            <input type="text" class="form-control" name="price" id="price" placeholder="Price" value="<?php echo $price; ?>" />
         </div>
 	    <input type="hidden" name="id" value="<?php echo $id; ?>" /> 
 	    <button type="submit" class="btn btn-primary"><?php echo $button ?></button> 

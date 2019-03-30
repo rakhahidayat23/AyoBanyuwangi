@@ -43,10 +43,10 @@ class Event extends CI_Controller
         if ($row) {
             $data = array(
 		'id' => $row->id,
-		'nama' => $row->nama,
-		'tanggal' => $row->tanggal,
-		'lokasi' => $row->lokasi,
-		'deskripsi' => $row->deskripsi,
+		'name' => $row->name,
+		'date' => $row->date,
+		'location' => $row->location,
+		'description' => $row->description,
 		'image' => $row->image,
 		'userName' => $row->userName,
         'spotName' => $row->spotName,
@@ -62,17 +62,17 @@ class Event extends CI_Controller
 
     public function create() 
     {
-        $dataSelect = $this->user_model->get_by_idUser($this->session->userdata('logged_in')['id']);
+        $dataSelect = $this->user_model->get_by_id($this->session->userdata('logged_in')['id']);
         $dataSelect2 = $this->spot_model->get_by_idUser($this->session->userdata('logged_in')['id']);
       
         $data = array(
             'button' => 'Create',
             'action' => site_url('event/create_action'),
 	    'id' => set_value('id'),
-	    'nama' => set_value('nama'),
-	    'tanggal' => set_value('tanggal'),
-	    'lokasi' => set_value('lokasi'),
-	    'deskripsi' => set_value('deskripsi'),
+	    'name' => set_value('name'),
+	    'date' => set_value('date'),
+	    'location' => set_value('location'),
+	    'description' => set_value('description'),
 	    'image' => set_value('image'),
 	    'user_id' => set_value('user_id'),
         'spot_id' => set_value('spot_id'),
@@ -106,10 +106,10 @@ class Event extends CI_Controller
             }else{
                 $file = 'assets/upload/event/'.$this->upload->data('file_name');
                 $data = array(
-		'nama' => $this->input->post('nama',TRUE),
-		'tanggal' => $this->input->post('tanggal',TRUE),
-		'lokasi' => $this->input->post('lokasi',TRUE),
-		'deskripsi' => $this->input->post('deskripsi',TRUE),
+		'name' => $this->input->post('name',TRUE),
+		'date' => $this->input->post('date',TRUE),
+		'location' => $this->input->post('location',TRUE),
+		'description' => $this->input->post('description',TRUE),
 		'image' => $this->input->post('image',TRUE),
 		'user_id' => $this->input->post('user_id',TRUE),
         'spot_id' => $this->input->post('spot_id',TRUE),
@@ -125,22 +125,24 @@ class Event extends CI_Controller
     public function update($id) 
     {
         $row = $this->Event_model->get_by_id($id);
-        $dataSelect = $this->spot_model->get_by_idUser($this->session->userdata('logged_in')['id']);
+        $dataSelect = $this->user_model->get_by_id($this->session->userdata('logged_in')['id']);
+        $dataSelect2 = $this->spot_model->get_by_idUser($this->session->userdata('logged_in')['id']);
 
         if ($row) {
             $data = array(
                 'button' => 'Update',
                 'action' => site_url('event/update_action'),
 		'id' => set_value('id', $row->id),
-		'nama' => set_value('nama', $row->nama),
-		'tanggal' => set_value('tanggal', $row->tanggal),
-		'lokasi' => set_value('lokasi', $row->lokasi),
-		'deskripsi' => set_value('deskripsi', $row->deskripsi),
+		'name' => set_value('name', $row->name),
+		'date' => set_value('date', $row->date),
+		'location' => set_value('location', $row->location),
+		'description' => set_value('description', $row->description),
 		'image' => set_value('image', $row->image),
 		'user_id' => set_value('user_id', $row->user_id),
         'spot_id' => set_value('spot_id', $row->spot_id),
         'price' => set_value('price', $row->price),
-        'spot_data' => $dataSelect, 
+        'user_data' => $dataSelect,
+        'spot_data' => $dataSelect2, 
     );
     $this->render['content']= $this->load->view('event/event_form', $data, TRUE);
     $this->load->view('template', $this->render);
@@ -169,10 +171,10 @@ class Event extends CI_Controller
             $foto_lama = $this->input->post('foto_lama',TRUE);
             if ( !$this->upload->do_upload('image')){
             $data = array(
-		'nama' => $this->input->post('nama',TRUE),
-		'tanggal' => $this->input->post('tanggal',TRUE),
-		'lokasi' => $this->input->post('lokasi',TRUE),
-		'deskripsi' => $this->input->post('deskripsi',TRUE),
+		'name' => $this->input->post('name',TRUE),
+		'date' => $this->input->post('date',TRUE),
+		'location' => $this->input->post('location',TRUE),
+		'description' => $this->input->post('description',TRUE),
 		'image' => $this->input->post('image',TRUE),
 		'user_id' => $this->input->post('user_id',TRUE),
         'spot_id' => $this->input->post('spot_id',TRUE),
@@ -182,10 +184,10 @@ class Event extends CI_Controller
         @unlink($foto_lama);
         $file = 'assets/upload/event/'.$this->upload->data('file_name');
         $data = array(
-            'nama' => $this->input->post('nama',TRUE),
-            'tanggal' => $this->input->post('tanggal',TRUE),
-            'lokasi' => $this->input->post('lokasi',TRUE),
-            'deskripsi' => $this->input->post('deskripsi',TRUE),
+            'name' => $this->input->post('name',TRUE),
+            'date' => $this->input->post('date',TRUE),
+            'location' => $this->input->post('location',TRUE),
+            'description' => $this->input->post('description',TRUE),
             'image' => $this->input->post('image',TRUE),
             'user_id' => $this->input->post('user_id',TRUE),
             'spot_id' => $this->input->post('spot_id',TRUE),
@@ -215,10 +217,10 @@ class Event extends CI_Controller
 
     public function _rules() 
     {
-	$this->form_validation->set_rules('nama', 'nama', 'trim|required');
-	$this->form_validation->set_rules('tanggal', 'tanggal', 'trim|required');
-	$this->form_validation->set_rules('lokasi', 'lokasi', 'trim|required');
-	$this->form_validation->set_rules('deskripsi', 'deskripsi', 'trim|required');
+	$this->form_validation->set_rules('name', 'name', 'trim|required');
+	$this->form_validation->set_rules('date', 'date', 'trim|required');
+	$this->form_validation->set_rules('location', 'location', 'trim|required');
+	$this->form_validation->set_rules('description', 'description', 'trim|required');
 	$this->form_validation->set_rules('image', 'image', 'trim|required');
 	$this->form_validation->set_rules('user_id', 'user id', 'trim|required');
     $this->form_validation->set_rules('spot_id', 'spot id', 'trim|required');

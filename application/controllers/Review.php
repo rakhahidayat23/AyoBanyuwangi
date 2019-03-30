@@ -38,8 +38,8 @@ class Review extends CI_Controller
 		'review' => $row->review,
 		'date' => $row->date,
 		'rating' => $row->rating,
-		'spot_id' => $row->spot_id,
-		'user_id' => $row->user_id,
+		'spotName' => $row->spotName,
+		'userName' => $row->userName,
 	    );
             $this->load->view('review/review_read', $data);
         } else {
@@ -50,6 +50,8 @@ class Review extends CI_Controller
 
     public function create() 
     {
+        $dataSelect = $this->user_model->get_by_id($this->session->userdata('logged_in')['id']);
+        $dataSelect2 = $this->spot_model->get_by_idUser($this->session->userdata('logged_in')['id']);
         $this->cek_status('review/create');
         $data = array(
             'button' => 'Create',
@@ -58,8 +60,10 @@ class Review extends CI_Controller
 	    'review' => set_value('review'),
 	    'date' => set_value('date'),
 	    'rating' => set_value('rating'),
-	    'spot_id' => set_value('spot_id'),
-	    'user_id' => set_value('user_id'),
+	    'spotName' => set_value('spot_id'),
+        'user_id' => set_value('user_id'),
+        'user_data' => $dataSelect,
+        'spot_data' => $dataSelect2,
 	);
         $this->load->view('review/review_form', $data);
     }
@@ -89,7 +93,8 @@ class Review extends CI_Controller
     {
         $this->cek_status('review/update');
         $row = $this->Review_model->get_by_id($id);
-
+        $dataSelect = $this->user_model->get_by_id($this->session->userdata('logged_in')['id']);
+        $dataSelect2 = $this->spot_model->get_by_idUser($this->session->userdata('logged_in')['id']);
         if ($row) {
             $data = array(
                 'button' => 'Update',
@@ -99,7 +104,9 @@ class Review extends CI_Controller
 		'date' => set_value('date', $row->date),
 		'rating' => set_value('rating', $row->rating),
 		'spot_id' => set_value('spot_id', $row->spot_id),
-		'user_id' => set_value('user_id', $row->user_id),
+        'user_id' => set_value('user_id', $row->user_id),
+        'user_data' => $dataSelect,
+        'spot_data' => $dataSelect2,
 	    );
             $this->load->view('review/review_form', $data);
         } else {
@@ -110,8 +117,9 @@ class Review extends CI_Controller
     
     public function update_action() 
     {
-        
-        $this->_rules();
+        $row = $this->Review_model->get_by_id($id);
+        $dataSelect = $this->user_model->get_by_id($this->session->userdata('logged_in')['id']);
+        $dataSelect2 = $this->spot_model->get_by_idUser($this->session->userdata('logged_in')['id']);
 
         if ($this->form_validation->run() == FALSE) {
             $this->update($this->input->post('id', TRUE));
@@ -122,6 +130,8 @@ class Review extends CI_Controller
                 'rating' => $this->input->post('rating',TRUE),
                 'spot_id' => $this->input->post('spot_id',TRUE),
                 'user_id' => $this->input->post('user_id',TRUE),
+                'user_data' => $dataSelect,
+                'spot_data' => $dataSelect2, 
 	        );
 
             $this->Review_model->update($this->input->post('id', TRUE), $data);

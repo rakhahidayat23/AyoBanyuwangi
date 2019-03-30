@@ -7,7 +7,7 @@ class Review_model extends CI_Model
 {
 
     public $table = 'review';
-    public $id = 'id';
+    public $id = 'review.id';
     public $order = 'DESC';
 
     function __construct()
@@ -17,7 +17,7 @@ class Review_model extends CI_Model
 
     // datatables
     function json() {
-        $this->datatables->select('review.id,review,review.date,rating,spot.name as spot_id, user.name as user_id');
+        $this->datatables->select('review.id,review,review.date,rating,spot.name as spotName, user.name as userName');
         $this->datatables->from('review');
         //add this line for join
         //$this->datatables->join('table2', 'review.field = table2.field');
@@ -37,7 +37,7 @@ class Review_model extends CI_Model
     // get data by id
     function get_by_id($id)
     {
-        $this->datatables->select('review.id,review,review.date,rating,spot.name as spot_id,user.name as user_id,spot_id');
+        $this->datatables->select('review.id,review,review.date,rating,spot.name as spotName,user.name as userName,spot_id');
         $this->db->where($this->id, $id);
         $this->db->join('spot', 'review.spot_id = spot.id');
         $this->db->join('user', 'review.user_id = user.id');

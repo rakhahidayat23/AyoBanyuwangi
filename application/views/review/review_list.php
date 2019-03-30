@@ -77,7 +77,7 @@
                         {
                             "data": "id",
                             "orderable": false
-                        },{"data": "review"},{"data": "date"},{"data": "rating"},{"data": "spot_id"},{"data": "user_id"},
+                        },{"data": "review"},{"data": "date"},{"data": "rating"},{"data": "spotName"},{"data": "userName"},
                         {
                             "data" : "action",
                             "orderable": false,
