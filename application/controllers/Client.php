@@ -23,6 +23,7 @@ class Client extends CI_Controller
         $this->load->model('Spot_model');
         $this->load->model('Review_model');
         $this->load->model('Gallery_model');
+        $this->load->model('News_model');
         $this->load->model('Product_model');
         $this->load->library('form_validation');        
         $this->load->library('datatables');
@@ -79,15 +80,27 @@ class Client extends CI_Controller
 
             $tmpType = $this->Type_spot_model->get_by_id($keySpot->type_spot_id);
             $tmpImage = $this->Gallery_model->get_by_spot($keySpot->id);
-            $tmpArray = array(
-                'id' => $keySpot->id,
-                'name' => $keySpot->name, 
-                'image' => $tmpImage[0]->image, 
-                'description' => $keySpot->description, 
-                'latitude' => $keySpot->latitude, 
-                'longitude' => $keySpot->longitude, 
-                'type' => $tmpType->name, 
-            );
+            if(!empty($tmpImage)){
+                $tmpArray = array(
+                    'id' => $keySpot->id,
+                    'name' => $keySpot->name, 
+                    'image' => $tmpImage[0]->image, 
+                    'description' => $keySpot->description, 
+                    'latitude' => $keySpot->latitude, 
+                    'longitude' => $keySpot->longitude, 
+                    'type' => $tmpType->name, 
+                );
+            }else{
+                $tmpArray = array(
+                    'id' => $keySpot->id,
+                    'name' => $keySpot->name, 
+                    'image' => 'https://www.layoutit.com/img/sports-q-c-1600-500-1.jpg', 
+                    'description' => $keySpot->description, 
+                    'latitude' => $keySpot->latitude, 
+                    'longitude' => $keySpot->longitude, 
+                    'type' => $tmpType->name, 
+                );
+            }
             
             array_push($spotList,$tmpArray);
         }
@@ -152,6 +165,7 @@ class Client extends CI_Controller
             'rating' => $tmp,
             'review' => $review_user,
             'review_all' =>$this->Review_model->get_by_spot($tmpSpot->id),
+            'news' => $this->News_model->get_by_spot($tmpSpot->id),
             'product' => $this->Product_model->get_by_spot($tmpSpot->id),
             'root_url' => base_url(),
             'action' => site_url('review/create_action')
@@ -173,16 +187,27 @@ class Client extends CI_Controller
             if(count($dataReview) > 0){
                 $totalReting = $totalReting / count($dataReview);
             }
-
-            $tmp = array(
-                'id' => $keySpot->id, 
-                'name' => $keySpot->name, 
-                'image' => $tmpImage[0]->image, 
-                'description' => $keySpot->description, 
-                'latitude' => $keySpot->latitude, 
-                'longitude' => $keySpot->longitude,
-                'reting' =>  $totalReting,
-            );
+            if(!empty($tmpImage)){
+                $tmp = array(
+                    'id' => $keySpot->id, 
+                    'name' => $keySpot->name, 
+                    'image' => $tmpImage[0]->image, 
+                    'description' => $keySpot->description, 
+                    'latitude' => $keySpot->latitude, 
+                    'longitude' => $keySpot->longitude,
+                    'reting' =>  $totalReting,
+                );
+            }else{
+                $tmp = array(
+                    'id' => $keySpot->id, 
+                    'name' => $keySpot->name, 
+                    'image' => 'https://www.layoutit.com/img/sports-q-c-1600-500-1.jpg', 
+                    'description' => $keySpot->description, 
+                    'latitude' => $keySpot->latitude, 
+                    'longitude' => $keySpot->longitude,
+                    'reting' =>  $totalReting,
+                );
+            }
             array_push($dataReturn,$tmp);
         }
         

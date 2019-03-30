@@ -79,7 +79,7 @@
 							</div>
 						</div>
 					</div> <!-- .tm-container-outer -->
-					<?php if(!empty($product)){ ?>
+					<?php if(!empty($product) && $type->name == 'UMKM'){ ?>
 						<hr>
 						<h4>
 							Product
@@ -125,39 +125,22 @@
 						</ul>
 						<div class="tab-content">
 							<div class="tab-pane active" style="margin: 20px;" id="tab1">
-								<div class="p-2 media">
-									<img class="mr-3" alt="Bootstrap Media Preview" src="https://www.layoutit.com/img/sports-q-c-64-64-8.jpg" />
-									<div class="media-body">
-										<h5 class="mt-0">
-											Nested media heading
-										</h5> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.
+							<?php if(!empty($news)){?>
+								<?php foreach ($news as $key) { ?>
+									<div class="p-2 media">
+										<img class="mr-3" alt="<?=$key->userName?>" src="<?=$key->image?>" />
+										<div class="media-body">
+											<h5 class="mt-0">
+												<?= $key->userName?>
+											</h5> 
+											<p><?=$key->tanggal?></p>
+											<p><?=$key->keterangan?></p>
+										</div>
 									</div>
-								</div>
-								<div class="p-2 media">
-									<img class="mr-3" alt="Bootstrap Media Preview" src="https://www.layoutit.com/img/sports-q-c-64-64-8.jpg" />
-									<div class="media-body">
-										<h5 class="mt-0">
-											Nested media heading
-										</h5> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.
-									</div>
-								</div>
-								<div class="p-2 media">
-									<img class="mr-3" alt="Bootstrap Media Preview" src="https://www.layoutit.com/img/sports-q-c-64-64-8.jpg" />
-									<div class="media-body">
-										<h5 class="mt-0">
-											Nested media heading
-										</h5> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.
-									</div>
-								</div>
-								<div class="p-2 media">
-									<img class="mr-3" alt="Bootstrap Media Preview" src="https://www.layoutit.com/img/sports-q-c-64-64-8.jpg" />
-									<div class="media-body">
-										<h5 class="mt-0">
-											Nested media heading
-										</h5> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.
-									</div>
-								</div>
-								
+								<?php } ?>
+							<?php }else{ ?>
+								<p>List Berita Tidak Tersedia</p>
+							<?php } ?>
 							</div>
 							<div class="tab-pane" style="margin: 20px;" id="tab2">
 								<?php if(!empty($review_all)){ ?>
@@ -180,7 +163,9 @@
 											</div>
 										</div>
 									<?php } ?>
-								<?php }?>
+								<?php }else{ ?>
+									<p>List Review Tidak Tersedia</p>
+								<?php } ?>
 							</div>
 						</div>
 					</div>

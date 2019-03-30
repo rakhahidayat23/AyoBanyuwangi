@@ -41,18 +41,18 @@ class Spot extends CI_Controller
         $row = $this->Spot_model->get_by_id($id);
         if ($row) {
             $data = array(
-		'id' => $row->id,
-		'name' => $row->name,
-		'description' => $row->description,
-		'latitude' => $row->latitude,
-		'longitude' => $row->longitude,
-		'date' => $row->date,
-		'type_spotName' => $row->type_spotName,
-        'userName' => $row->userName,
-        'start' => $row->start,
-        'end' => $row->end,
-        'status' => $row->status,
-        );
+                'id' => $row->id,
+                'name' => $row->name,
+                'description' => $row->description,
+                'latitude' => $row->latitude,
+                'longitude' => $row->longitude,
+                'date' => $row->date,
+                'type_spotName' => $row->type_spotName,
+                'userName' => $row->userName,
+                'start' => $row->start,
+                'end' => $row->end,
+                'status' => $row->status,
+            );
         $this->render['content']= $this->load->view('spot/spot_read', $data, TRUE);
             $this->load->view('template', $this->render);
             
@@ -67,22 +67,21 @@ class Spot extends CI_Controller
         $data = array(
             'button' => 'Create',
             'action' => site_url('spot/create_action'),
-	    'id' => set_value('id'),
-	    'name' => set_value('name'),
-	    'description' => set_value('description'),
-	    'latitude' => set_value('latitude'),
-	    'longitude' => set_value('longitude'),
-	    'date' => set_value('date'),
-	    'type_spot_id' => set_value('type_spot_id'),
-        'user_id' => set_value('user_id'),
-        'start' => set_value('start'),
-        'end' => set_value('end'),
-        'status' => set_value('status'),
-        
-        
-	);
-    $this->render['content']= $this->load->view('spot/spot_form', $data, TRUE);
-    $this->load->view('template', $this->render);
+            'id' => set_value('id'),
+            'name' => set_value('name'),
+            'description' => set_value('description'),
+            'latitude' => set_value('latitude'),
+            'longitude' => set_value('longitude'),
+            'date' => set_value('date'),
+            'type_spot_id' => set_value('type_spot_id'),
+            'user_id' => set_value('user_id',$this->session->userdata('logged_in')['id']),
+            'start' => set_value('start'),
+            'end' => set_value('end'),
+            'status' => set_value('status'),  
+            'spot' => $this->Spot_model->get_by_idUser($this->session->userdata('logged_in')['id']),
+	    );
+        $this->render['content']= $this->load->view('spot/spot_form', $data, TRUE);
+        $this->load->view('template', $this->render);
     }
     
     public function create_action() 
@@ -93,16 +92,16 @@ class Spot extends CI_Controller
             $this->create();
         } else {
             $data = array(
-		'name' => $this->input->post('name',TRUE),
-		'description' => $this->input->post('description',TRUE),
-		'latitude' => $this->input->post('latitude',TRUE),
-		'longitude' => $this->input->post('longitude',TRUE),
-		'date' => date("Y-m-d H:i:s"),
-		'type_spot_id' => $this->input->post('type_spot_id',TRUE),
-        'user_id' => $this->input->post('user_id',TRUE),
-        'start' => $this->input->post('start',TRUE),
-		'end' => $this->input->post('end',TRUE),
-	    );
+                'name' => $this->input->post('name',TRUE),
+                'description' => $this->input->post('description',TRUE),
+                'latitude' => $this->input->post('latitude',TRUE),
+                'longitude' => $this->input->post('longitude',TRUE),
+                'date' => date("Y-m-d H:i:s"),
+                'type_spot_id' => $this->input->post('type_spot_id',TRUE),
+                'user_id' => $this->input->post('user_id',TRUE),
+                'start' => $this->input->post('start',TRUE),
+                'end' => $this->input->post('end',TRUE),
+            );
 
             $this->Spot_model->insert($data);
             $this->session->set_flashdata('message', 'Create Record Success');
@@ -114,22 +113,25 @@ class Spot extends CI_Controller
     {
         $row = $this->Spot_model->get_by_id($id);
 
+
         if ($row) {
             $data = array(
                 'button' => 'Update',
                 'action' => site_url('spot/update_action'),
-		'id' => set_value('id', $row->id),
-		'name' => set_value('name', $row->name),
-		'description' => set_value('description', $row->description),
-		'latitude' => set_value('latitude', $row->latitude),
-		'longitude' => set_value('longitude', $row->longitude),
-		'date' => set_value('date', $row->date),
-		'type_spot_id' => set_value('type_spot_id', $row->type_spot_id),
-        'user_id' => set_value('user_id', $row->user_id),
-        'start' => set_value('start', $row->start),
-        'end' => set_value('end', $row->end),
-        'status' => set_value('status', $row->status),
-        );
+                'id' => set_value('id', $row->id),
+                'name' => set_value('name', $row->name),
+                'description' => set_value('description', $row->description),
+                'latitude' => set_value('latitude', $row->latitude),
+                'longitude' => set_value('longitude', $row->longitude),
+                'date' => set_value('date', $row->date),
+                'type_spot_id' => set_value('type_spot_id', $row->type_spot_id),
+                'user_id' => set_value('user_id', $this->session->userdata('logged_in')['id']),
+                'start' => set_value('start', $row->start),
+                'end' => set_value('end', $row->end),
+                'status' => set_value('status', $row->status),
+                'spot' => $this->Spot_model->get_by_idUser($this->session->userdata('logged_in')['id']),
+                
+            );
             $this->render['content']= $this->load->view('spot/spot_form', $data, TRUE);
             $this->load->view('template', $this->render);
         } else {

@@ -138,7 +138,7 @@
                               </a>
                               <ul class="dropdown-menu">
                                 <li><a href="#">Profile</a></li>
-                                <li><a href="#">Logout</a></li>
+                                <li><a href="<?=base_url()?>/auth/logout_action">Logout</a></li>
                               </ul>
                         </li>
                     </ul>

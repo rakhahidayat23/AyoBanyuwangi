@@ -17,8 +17,8 @@
 	    <tr><td>Latitude</td><td><?php echo $latitude; ?></td></tr>
 	    <tr><td>Longitude</td><td><?php echo $longitude; ?></td></tr>
 	    <tr><td>Date</td><td><?php echo $date; ?></td></tr>
-	    <tr><td>Type Spot Id</td><td><?php echo $type_spot_id; ?></td></tr>
-	    <tr><td>User Id</td><td><?php echo $user_id; ?></td></tr>
+	    <tr><td>Type Spot Id</td><td><?php echo $type_spotName; ?></td></tr>
+	    <tr><td>User Id</td><td><?php echo $userName; ?></td></tr>
 	    <tr><td></td><td><a href="<?php echo site_url('spot') ?>" class="btn btn-default">Cancel</a></td></tr>
 	</table>
         </body>

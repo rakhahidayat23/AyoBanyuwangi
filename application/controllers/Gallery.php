@@ -25,39 +25,32 @@ class Gallery extends CI_Controller
     public function index()
     {
         $this->load->view('gallery/gallery_list');
-    } 
+    }
+    
+    public function detailGalery($id){
+        $data = array(
+            'gallery' => $this->Gallery_model->get_by_spot($id), 
+            'id_params' => $id,
+        );
+        $this->render['content']= $this->load->view('gallery/gallery_read', $data, TRUE);
+        $this->load->view('template', $this->render);
+    }
     
     public function json() {
         header('Content-Type: application/json');
         echo $this->Gallery_model->json();
     }
 
-    public function read($id) 
-    {
-        $row = $this->Gallery_model->get_by_id($id);
-        if ($row) {
-            $data = array(
-		'id' => $row->id,
-		'image' => $row->image,
-		'spot_id' => $row->spot_id,
-	    );
-            $this->load->view('gallery/gallery_read', $data);
-        } else {
-            $this->session->set_flashdata('message', 'Record Not Found');
-            redirect(site_url('gallery'));
-        }
-    }
-
-    public function create() 
+    public function create($params) 
     {
         $data = array(
             'button' => 'Create',
             'action' => site_url('gallery/create_action'),
-	    'id' => set_value('id'),
-	    'image' => set_value('image'),
-	    'spot_id' => set_value('spot_id'),
-	);
-        $this->load->view('gallery/gallery_form', $data);
+	        'image' => set_value('image'),
+	        'spot_id' => set_value('spot_id',$params),
+        );
+        $this->render['content']= $this->load->view('gallery/gallery_form', $data, TRUE);
+        $this->load->view('template', $this->render);
     }
     
     public function create_action() 
@@ -65,76 +58,50 @@ class Gallery extends CI_Controller
         $this->_rules();
 
         if ($this->form_validation->run() == FALSE) {
-            $this->create();
+            $this->create($this->input->post('spot_id',TRUE));
         } else {
-            $data = array(
-		'image' => $this->input->post('image',TRUE),
-		'spot_id' => $this->input->post('spot_id',TRUE),
-	    );
+            $config['upload_path']          = './assets/upload/product/';
+            $config['allowed_types']        = 'gif|jpg|png|jpeg';
+            $config['max_size']             = 1000000000;
+            $config['max_width']            = 10240;
+            $config['max_height']           = 7680;
+            
+            $this->load->library('upload', $config);
 
-            $this->Gallery_model->insert($data);
-            $this->session->set_flashdata('message', 'Create Record Success');
-            redirect(site_url('gallery'));
+            if ( !$this->upload->do_upload('image')){
+                $error = array('error' => $this->upload->display_errors());
+                var_dump($error);
+            }else{
+                $file = 'assets/upload/product/'.$this->upload->data('file_name');
+                $data = array(
+                    'image' => $file,
+                    'type_gallery_id' => $this->input->post('type_gallery',TRUE),
+                    'spot_id' => $this->input->post('spot_id',TRUE),
+                );
+                $this->Gallery_model->insert($data);
+                $this->session->set_flashdata('message', 'Create Record Success');
+                redirect(site_url('gallery/detailGalery/'.$this->input->post('spot_id',TRUE)));
+            }
         }
     }
     
-    public function update($id) 
-    {
-        $row = $this->Gallery_model->get_by_id($id);
-
-        if ($row) {
-            $data = array(
-                'button' => 'Update',
-                'action' => site_url('gallery/update_action'),
-		'id' => set_value('id', $row->id),
-		'image' => set_value('image', $row->image),
-		'spot_id' => set_value('spot_id', $row->spot_id),
-	    );
-            $this->load->view('gallery/gallery_form', $data);
-        } else {
-            $this->session->set_flashdata('message', 'Record Not Found');
-            redirect(site_url('gallery'));
-        }
-    }
-    
-    public function update_action() 
-    {
-        $this->_rules();
-
-        if ($this->form_validation->run() == FALSE) {
-            $this->update($this->input->post('id', TRUE));
-        } else {
-            $data = array(
-		'image' => $this->input->post('image',TRUE),
-		'spot_id' => $this->input->post('spot_id',TRUE),
-	    );
-
-            $this->Gallery_model->update($this->input->post('id', TRUE), $data);
-            $this->session->set_flashdata('message', 'Update Record Success');
-            redirect(site_url('gallery'));
-        }
-    }
-    
-    public function delete($id) 
+    public function delete($id,$param) 
     {
         $row = $this->Gallery_model->get_by_id($id);
 
         if ($row) {
             $this->Gallery_model->delete($id);
             $this->session->set_flashdata('message', 'Delete Record Success');
-            redirect(site_url('gallery'));
+            redirect(site_url('gallery/detailGalery/'.$param));
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
-            redirect(site_url('gallery'));
+            redirect(site_url('gallery/detailGalery/'.$param));
         }
     }
 
     public function _rules() 
     {
-	$this->form_validation->set_rules('image', 'image', 'trim|required');
 	$this->form_validation->set_rules('spot_id', 'spot id', 'trim|required');
-
-	$this->form_validation->set_rules('id', 'id', 'trim');
 	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
     }
 

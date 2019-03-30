@@ -43,7 +43,11 @@ class News_model extends CI_Model
 
     function get_by_spot($id)
     {   
+        $this->db->select('news.id,spot.name as spotName,news.tanggal,news.judul,news.keterangan, id_spot,user_id,user.name as userName, user.image');
         $this->db->where('id_spot', $id);
+        $this->db->join('spot', 'news.id_spot = spot.id');
+        $this->db->join('user', 'spot.user_id = user.id');
+        $this->db->order_by("news.id", "asc");
         return $this->db->get($this->table)->result();
     }
     
