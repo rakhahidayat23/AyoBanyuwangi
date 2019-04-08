@@ -26,7 +26,7 @@
                             </div>
                         </div>
                     </div> <!-- form-row -->
-                    <div class="form-row tm-search-form-row">
+                    <!-- <div class="form-row tm-search-form-row">
                         <div class="form-group tm-form-group tm-form-group-pad tm-form-group-2">
                             <label for="inputCheckIn">Type Of Destination</label>
                             <select name="typeSpot" id="typeSpot" class="form-control tm-select" id="inputRoom">
@@ -39,7 +39,7 @@
                             <label for="btnSubmit">&nbsp;</label>
                             <a href="#" class="btn btn-primary tm-btn tm-btn-search text-uppercase"  id="btnSubmitType">Check Destination</a>
                         </div>
-                    </div>
+                    </div> -->
                     </form>                                                      
             </div> <!-- row -->
             <div class="tm-banner-overlay"></div>

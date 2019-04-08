@@ -29,7 +29,18 @@ class Event_model extends CI_Model
     // get all
     function get_all()
     {
+        $this->db->select('event.id,event.name,event.date,event.location,event.description,event.image,user.name as userName,spot.name as spotName,event.price');
+        $this->datatables->join('spot', 'event.spot_id = spot.id');
+        $this->datatables->join('user', 'event.user_id = user.id');
         $this->db->order_by($this->id, $this->order);
+        return $this->db->get($this->table)->result();
+    }
+    function get_all_limit($limit, $start){
+        $this->db->select('event.id,event.name,event.date,event.location,event.description,event.image,user.name as userName,spot.name as spotName,event.price');
+        $this->datatables->join('spot', 'event.spot_id = spot.id');
+        $this->datatables->join('user', 'event.user_id = user.id');
+        $this->db->order_by($this->id, $this->order);
+        $this->db->limit($limit, $start);
         return $this->db->get($this->table)->result();
     }
 

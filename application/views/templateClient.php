@@ -65,6 +65,9 @@ http://www.templatemo.com/tm-511-journey
                                     <a class="nav-link" href="<?= base_url()?>#tm-section-4">Maps</a>
                                 </li>
                                 <li class="nav-item">
+                                    <a class="nav-link" href="<?= base_url()?>client/event">Event</a>
+                                </li>
+                                <li class="nav-item">
                                     <a class="nav-link" href="<?= base_url()?>auth">Login</a>
                                 </li>
                             </ul>

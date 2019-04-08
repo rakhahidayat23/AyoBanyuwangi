@@ -1,32 +1,23 @@
-<form id="my-form" action="<?=base_url()?>client/PayAction" method="post">
-<input type="text" name="test" id="test">
-<input type="text" name="param2" id="param2">
-<br>
-<button id="save">Save</button>
-</form>
-
-<script>
-$(document).ready(function(){
-    var token = JSON.parse('<?php echo $token ?>');
-    console.log(token);
-    $("#my-form").submit(function(event){
-        event.preventDefault(); //prevent default action 
-        var post_url = $(this).attr("action"); //get form action url
-        var date =  new Date().toISOString();
-
-        var payload = 'path=/sandbox/v2/transfer/internal&verb=POST&token=' +token + '&timestamp=' + date + '&body=';
-
-        // var hmacSignature = CryptoJS.enc.Base64.stringify(CryptoJS.HmacSHA256(payload, 'vNBIjyPII486adCr'));
-        
-        
-        $.post( post_url, {
-            param2 : $("#param2").val(),
-            date : new Date().toISOString(),
-            
-        }, function(response) {
-            console.log(response);
-            
-        });
-    });
-});
-</script>
+<div class="tm-container-outer" id="tm-section-3">
+    <div class="tab-content clearfix">
+        <div class="tab-pane fade show active pt-5">
+            <div class="tm-recommended-place-wrap">
+                <?php foreach ($data as $keySpot) { ?>
+                    <div class="tm-recommended-place">
+                        <img src= "<?= base_url().$keySpot->image?>" alt="<?= $keySpot->image?>" class="img-fluid tm-recommended-img" style="height: 200px;">
+                        <div class="tm-recommended-description-box">
+                            <h3 class="tm-recommended-title"><?= $keySpot->name?></h3>
+                            <h6 class="tm-text-gray">Rp. <?= $keySpot->price?></h6>   
+                            <p class="tm-text-highlight"><?= $keySpot->location?> </p>
+                            <p class="tm-text-gray"><?= $keySpot->description?></p>   
+                        </div>
+                        <a href="<?=base_url()?>client/detail/<?= $keySpot->id?>" class="tm-recommended-price-box">
+                            <p class="tm-recommended-price-link">Go Event</p>
+                        </a>                                             
+                    </div>
+                <?php } ?>
+            </div>                  
+            <?php echo $pagination; ?>
+        </div>
+    </div>
+</div>
